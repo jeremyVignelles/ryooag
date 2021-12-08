@@ -8,13 +8,12 @@ namespace Ryooag.Internal;
 
 internal class OneOfOpenApiSchemaOpenApiReferenceConverter : OneOfJsonConverter<OpenApiSchema, OpenApiReference>
 {
-    protected override bool LeftIsValid(OpenApiSchema value) => value.type is not null || value.allOf is not null || value.anyOf is not null || value.oneOf is not null || value.not is not null;
+    protected override bool LeftIsValid(OpenApiSchema value) => value with { extensions = null } != new OpenApiSchema();
     protected override bool RightIsValid(OpenApiReference value) => value._ref is not null;
 }
 
 internal class OneOfOpenApiResponseOpenApiReferenceConverter : OneOfJsonConverter<OpenApiResponse, OpenApiReference>
 {
-    // TODO : rewrite this entierly. Every model should have its own validator...
-    protected override bool LeftIsValid(OpenApiResponse value) => value.description is not null || value.headers is not null || value.content is not null || value.links is not null;
+    protected override bool LeftIsValid(OpenApiResponse value) => value with { extensions = null } != new OpenApiResponse();
     protected override bool RightIsValid(OpenApiReference value) => value._ref is not null;
 }

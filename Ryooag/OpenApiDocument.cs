@@ -9,12 +9,12 @@ namespace Ryooag;
 public record OpenApiDocument(
     string openapi,
     OpenApiInfo info,
-    OpenApiServer[]? servers,
     Dictionary<string, OpenApiPathItem> paths,
-    OpenApiComponents? components,
-    Dictionary<string, string[]>? security,
-    OpenApiTag[]? tags,
-    OpenApiExternalDocumentation? externalDocs
+    OpenApiServer[]? servers = null,
+    OpenApiComponents? components = null,
+    Dictionary<string, string[]>? security = null,
+    OpenApiTag[]? tags = null,
+    OpenApiExternalDocumentation? externalDocs = null
 )
 {
 
@@ -24,11 +24,11 @@ public record OpenApiDocument(
 
 public record OpenApiInfo(
     string title,
-    string? description,
-    string? termsOfService,
-    OpenApiContact? contact,
-    OpenApiLicense? license,
-    string version
+    string version,
+    string? description = null,
+    string? termsOfService = null,
+    OpenApiContact? contact = null,
+    OpenApiLicense? license = null
 )
 {
 
@@ -37,9 +37,9 @@ public record OpenApiInfo(
 };
 
 public record OpenApiContact(
-    string? name,
-    string? url,
-    string? email
+    string? name = null,
+    string? url = null,
+    string? email = null
 )
 {
 
@@ -49,7 +49,7 @@ public record OpenApiContact(
 
 public record OpenApiLicense(
     string name,
-    string? url
+    string? url = null
 )
 {
 
@@ -59,8 +59,8 @@ public record OpenApiLicense(
 
 public record OpenApiServer(
     string url,
-    string? description,
-    Dictionary<string, OpenApiServerVariable>? variables
+    string? description = null,
+    Dictionary<string, OpenApiServerVariable>? variables = null
 )
 {
 
@@ -69,9 +69,9 @@ public record OpenApiServer(
 };
 
 public record OpenApiServerVariable(
-    string[]? @enum,
     string @default,
-    string? description
+    string[]? @enum = null,
+    string? description = null
 )
 {
 
@@ -81,31 +81,31 @@ public record OpenApiServerVariable(
 
 public record OpenApiComponents(
     [property:JsonConverter(typeof(DictionarySystemTextJsonConverter<OneOfOpenApiSchemaOpenApiReferenceConverter, TypeUnion<OpenApiSchema, OpenApiReference>>))]
-    Dictionary<string, TypeUnion<OpenApiSchema, OpenApiReference>>? schemas,
+    Dictionary<string, TypeUnion<OpenApiSchema, OpenApiReference>>? schemas = null,
 
     [property:JsonConverter(typeof(DictionarySystemTextJsonConverter<OneOfOpenApiResponseOpenApiReferenceConverter, TypeUnion<OpenApiResponse, OpenApiReference>>))]
-    Dictionary<string, TypeUnion<OpenApiResponse, OpenApiReference>>? responses,
+    Dictionary<string, TypeUnion<OpenApiResponse, OpenApiReference>>? responses = null,
 
     [property:JsonConverter(typeof(DictionarySystemTextJsonConverter<AnyOfJsonConverter<OpenApiParameter, OpenApiReference>, TypeUnion<OpenApiParameter, OpenApiReference>>))]
-    Dictionary<string, TypeUnion<OpenApiParameter, OpenApiReference>>? parameters,
+    Dictionary<string, TypeUnion<OpenApiParameter, OpenApiReference>>? parameters = null,
 
     [property:JsonConverter(typeof(DictionarySystemTextJsonConverter<AnyOfJsonConverter<OpenApiExample, OpenApiReference>, TypeUnion<OpenApiExample, OpenApiReference>>))]
-    Dictionary<string, TypeUnion<OpenApiExample, OpenApiReference>>? examples,
+    Dictionary<string, TypeUnion<OpenApiExample, OpenApiReference>>? examples = null,
 
     [property:JsonConverter(typeof(DictionarySystemTextJsonConverter<AnyOfJsonConverter<OpenApiRequestBody, OpenApiReference>, TypeUnion<OpenApiRequestBody, OpenApiReference>>))]
-    Dictionary<string, TypeUnion<OpenApiRequestBody, OpenApiReference>>? requestBodies,
+    Dictionary<string, TypeUnion<OpenApiRequestBody, OpenApiReference>>? requestBodies = null,
 
     [property:JsonConverter(typeof(DictionarySystemTextJsonConverter<AnyOfJsonConverter<OpenApiHeader, OpenApiReference>, TypeUnion<OpenApiHeader, OpenApiReference>>))]
-    Dictionary<string, TypeUnion<OpenApiHeader, OpenApiReference>>? headers,
+    Dictionary<string, TypeUnion<OpenApiHeader, OpenApiReference>>? headers = null,
 
     [property:JsonConverter(typeof(DictionarySystemTextJsonConverter<AnyOfJsonConverter<OpenApiSchema, OpenApiReference>, TypeUnion<OpenApiSchema, OpenApiReference>>))]
-    Dictionary<string, TypeUnion<OpenApiSchema, OpenApiReference>>? securitySchemes,
+    Dictionary<string, TypeUnion<OpenApiSchema, OpenApiReference>>? securitySchemes = null,
 
     [property:JsonConverter(typeof(DictionarySystemTextJsonConverter<AnyOfJsonConverter<OpenApiLink, OpenApiReference>, TypeUnion<OpenApiLink, OpenApiReference>>))]
-    Dictionary<string, TypeUnion<OpenApiLink, OpenApiReference>>? links,
+    Dictionary<string, TypeUnion<OpenApiLink, OpenApiReference>>? links = null,
 
     [property:JsonConverter(typeof(DictionarySystemTextJsonConverter<AnyOfJsonConverter<Dictionary<string, OpenApiPathItem>, OpenApiReference>, TypeUnion<Dictionary<string, OpenApiPathItem>, OpenApiReference>>))]
-    Dictionary<string, TypeUnion<Dictionary<string, OpenApiPathItem>, OpenApiReference>>? callbacks
+    Dictionary<string, TypeUnion<Dictionary<string, OpenApiPathItem>, OpenApiReference>>? callbacks = null
 )
 {
 
@@ -114,22 +114,22 @@ public record OpenApiComponents(
 };
 
 public record OpenApiPathItem(
-    string? summary,
-    string? description,
-    OpenApiOperation? get,
-    OpenApiOperation? put,
-    OpenApiOperation? post,
-    OpenApiOperation? delete,
-    OpenApiOperation? options,
-    OpenApiOperation? head,
-    OpenApiOperation? patch,
-    OpenApiOperation? trace,
-    OpenApiServer[]? servers,
+    string? summary = null,
+    string? description = null,
+    OpenApiOperation? get = null,
+    OpenApiOperation? put = null,
+    OpenApiOperation? post = null,
+    OpenApiOperation? delete = null,
+    OpenApiOperation? options = null,
+    OpenApiOperation? head = null,
+    OpenApiOperation? patch = null,
+    OpenApiOperation? trace = null,
+    OpenApiServer[]? servers = null,
 
     [property:JsonConverter(typeof(ArraySystemTextJsonConverter<AnyOfJsonConverter<OpenApiParameter, OpenApiReference>, TypeUnion<OpenApiParameter, OpenApiReference>>))]
-    TypeUnion<OpenApiParameter, OpenApiReference>[]? parameters,
+    TypeUnion<OpenApiParameter, OpenApiReference>[]? parameters = null,
 
-    [property:JsonPropertyName("$ref")] string? _ref
+    [property:JsonPropertyName("$ref")] string? _ref = null
 )
 {
     [JsonExtensionData]
@@ -137,24 +137,24 @@ public record OpenApiPathItem(
 };
 
 public record OpenApiOperation(
-    string[]? tags,
-    string? summary,
-    string? description,
-    OpenApiExternalDocumentation? externalDocs,
-    string? operationId,
+    Dictionary<string, OpenApiResponse> responses,
+    string[]? tags = null,
+    string? summary = null,
+    string? description = null,
+    OpenApiExternalDocumentation? externalDocs = null,
+    string? operationId = null,
 
     [property:JsonConverter(typeof(ArraySystemTextJsonConverter<AnyOfJsonConverter<OpenApiParameter, OpenApiReference>, TypeUnion<OpenApiParameter, OpenApiReference>>))]
-    TypeUnion<OpenApiParameter, OpenApiReference>[]? parameters,
+    TypeUnion<OpenApiParameter, OpenApiReference>[]? parameters = null,
 
     [property:JsonConverter(typeof(AnyOfJsonConverter<OpenApiRequestBody, OpenApiReference>))]
-    TypeUnion<OpenApiRequestBody, OpenApiReference>? requestBody,
-    Dictionary<string, OpenApiResponse> responses,
+    TypeUnion<OpenApiRequestBody, OpenApiReference>? requestBody = null,
 
     [property:JsonConverter(typeof(DictionarySystemTextJsonConverter<AnyOfJsonConverter<Dictionary<string, OpenApiPathItem>, OpenApiReference>, TypeUnion<Dictionary<string, OpenApiPathItem>, OpenApiReference>>))]
-    Dictionary<string, TypeUnion<Dictionary<string, OpenApiPathItem>, OpenApiReference>>? callbacks,
-    bool? deprecated,
-    Dictionary<string, string[]>[]? security,
-    OpenApiServer[]? servers
+    Dictionary<string, TypeUnion<Dictionary<string, OpenApiPathItem>, OpenApiReference>>? callbacks = null,
+    bool? deprecated = null,
+    Dictionary<string, string[]>[]? security = null,
+    OpenApiServer[]? servers = null
 )
 {
 
@@ -162,7 +162,7 @@ public record OpenApiOperation(
     public Dictionary<string, JsonElement>? extensions { get; init; }
 };
 
-public record OpenApiExternalDocumentation(string? description, string url)
+public record OpenApiExternalDocumentation(string url, string? description = null)
 {
 
     [JsonExtensionData]
@@ -172,19 +172,19 @@ public record OpenApiExternalDocumentation(string? description, string url)
 public record OpenApiParameter(
     string name,
     string @in,
-    string? description,
-    bool? required,
-    bool? deprecated,
-    bool? allowEmptyValue,
-    string? style,
-    bool? explode,
-    bool? allowReserved,
+    Dictionary<string, OpenApiMediaType> content,
+    string? description = null,
+    bool? required = null,
+    bool? deprecated = null,
+    bool? allowEmptyValue = null,
+    string? style = null,
+    bool? explode = null,
+    bool? allowReserved = null,
     [property:JsonConverter(typeof(AnyOfJsonConverter<OpenApiSchema, OpenApiReference>))]
-    TypeUnion<OpenApiSchema, OpenApiReference>? schema,
-    JsonElement? example,
+    TypeUnion<OpenApiSchema, OpenApiReference>? schema = null,
+    JsonElement? example = null,
     [property:JsonConverter(typeof(DictionarySystemTextJsonConverter<AnyOfJsonConverter<OpenApiExample, OpenApiReference>, TypeUnion<OpenApiExample, OpenApiReference>>))]
-    Dictionary<string, TypeUnion<OpenApiExample, OpenApiReference>>? examples,
-    Dictionary<string, OpenApiMediaType> content
+    Dictionary<string, TypeUnion<OpenApiExample, OpenApiReference>>? examples = null
     )
 {
 
@@ -193,9 +193,9 @@ public record OpenApiParameter(
 };
 
 public record OpenApiRequestBody(
-    string? description,
     Dictionary<string, OpenApiMediaType> content,
-    bool? required
+    string? description = null,
+    bool? required = null
 )
 {
 
@@ -205,11 +205,11 @@ public record OpenApiRequestBody(
 
 public record OpenApiMediaType(
     [property:JsonConverter(typeof(AnyOfJsonConverter<OpenApiSchema, OpenApiReference>))]
-    TypeUnion<OpenApiSchema, OpenApiReference>? schema,
-    JsonElement? example,
+    TypeUnion<OpenApiSchema, OpenApiReference>? schema = null,
+    JsonElement? example = null,
     [property:JsonConverter(typeof(DictionarySystemTextJsonConverter<AnyOfJsonConverter<OpenApiExample, OpenApiReference>, TypeUnion<OpenApiExample, OpenApiReference>>))]
-    Dictionary<string, TypeUnion<OpenApiExample, OpenApiReference>>? examples,
-    Dictionary<string, OpenApiEncoding>? encoding
+    Dictionary<string, TypeUnion<OpenApiExample, OpenApiReference>>? examples = null,
+    Dictionary<string, OpenApiEncoding>? encoding = null
 )
 {
     [JsonExtensionData]
@@ -217,12 +217,12 @@ public record OpenApiMediaType(
 };
 
 public record OpenApiEncoding(
-    string? contentType,
+    string? contentType = null,
     [property:JsonConverter(typeof(DictionarySystemTextJsonConverter<AnyOfJsonConverter<OpenApiHeader, OpenApiReference>, TypeUnion<OpenApiHeader, OpenApiReference>>))]
-    Dictionary<string, TypeUnion<OpenApiHeader, OpenApiReference>>? headers,
-    string? style,
-    bool? explode,
-    bool? allowReserved
+    Dictionary<string, TypeUnion<OpenApiHeader, OpenApiReference>>? headers = null,
+    string? style = null,
+    bool? explode = null,
+    bool? allowReserved = null
 )
 {
 
@@ -231,12 +231,12 @@ public record OpenApiEncoding(
 };
 
 public record OpenApiResponse(
-    string? description,
+    string? description = null,
     [property:JsonConverter(typeof(DictionarySystemTextJsonConverter<AnyOfJsonConverter<OpenApiHeader, OpenApiReference>, TypeUnion<OpenApiHeader, OpenApiReference>>))]
-    Dictionary<string, TypeUnion<OpenApiHeader, OpenApiReference>>? headers,
-    Dictionary<string, OpenApiMediaType>? content,
+    Dictionary<string, TypeUnion<OpenApiHeader, OpenApiReference>>? headers = null,
+    Dictionary<string, OpenApiMediaType>? content = null,
     [property:JsonConverter(typeof(DictionarySystemTextJsonConverter<AnyOfJsonConverter<OpenApiLink, OpenApiReference>, TypeUnion<OpenApiLink, OpenApiReference>>))]
-    Dictionary<string, TypeUnion<OpenApiLink, OpenApiReference>>? links
+    Dictionary<string, TypeUnion<OpenApiLink, OpenApiReference>>? links = null
 )
 {
 
@@ -245,10 +245,10 @@ public record OpenApiResponse(
 };
 
 public record OpenApiExample(
-    string? summary,
-    string? description,
-    JsonElement? value,
-    string? externalValue
+    string? summary = null,
+    string? description = null,
+    JsonElement? value = null,
+    string? externalValue = null
 )
 {
 
@@ -257,12 +257,12 @@ public record OpenApiExample(
 };
 
 public record OpenApiLink(
-    string? operationRef,
-    string? operationId,
-    Dictionary<string, JsonElement>? parameters,
-    JsonElement? requestBody,
-    string? description,
-    OpenApiServer? server
+    string? operationRef = null,
+    string? operationId = null,
+    Dictionary<string, JsonElement>? parameters = null,
+    JsonElement? requestBody = null,
+    string? description = null,
+    OpenApiServer? server = null
 )
 {
 
@@ -271,19 +271,19 @@ public record OpenApiLink(
 };
 
 public record OpenApiHeader(
-    string? description,
-    bool? required,
-    bool? deprecated,
-    bool? allowEmptyValue,
-    string? style,
-    bool? explode,
-    bool? allowReserved,
+    Dictionary<string, OpenApiMediaType> content,
+    string? description = null,
+    bool? required = null,
+    bool? deprecated = null,
+    bool? allowEmptyValue = null,
+    string? style = null,
+    bool? explode = null,
+    bool? allowReserved = null,
     [property:JsonConverter(typeof(AnyOfJsonConverter<OpenApiSchema, OpenApiReference>))]
-    TypeUnion<OpenApiSchema, OpenApiReference>? schema,
-    JsonElement? example,
+    TypeUnion<OpenApiSchema, OpenApiReference>? schema = null,
+    JsonElement? example = null,
     [property:JsonConverter(typeof(DictionarySystemTextJsonConverter<AnyOfJsonConverter<OpenApiExample, OpenApiReference>, TypeUnion<OpenApiExample, OpenApiReference>>))]
-    Dictionary<string, TypeUnion<OpenApiExample, OpenApiReference>>? examples,
-    Dictionary<string, OpenApiMediaType> content
+    Dictionary<string, TypeUnion<OpenApiExample, OpenApiReference>>? examples = null
 )
 {
 
@@ -293,8 +293,8 @@ public record OpenApiHeader(
 
 public record OpenApiTag(
     string name,
-    string? description,
-    OpenApiExternalDocumentation? externalDocs
+    string? description = null,
+    OpenApiExternalDocumentation? externalDocs = null
 )
 {
 
@@ -310,48 +310,48 @@ public record OpenApiReference([property: JsonPropertyName("$ref")] string _ref)
 };
 
 public record OpenApiSchema(
-    string? title,
-    string? description,
-    string? type,
-    string? format,
-    int? multipleOf,
-    double? maximum,
-    bool? exclusiveMaximum,
-    double? minimum,
-    bool? exclusiveMinimum,
+    string? title = null,
+    string? description = null,
+    string? type = null,
+    string? format = null,
+    int? multipleOf = null,
+    double? maximum = null,
+    bool? exclusiveMaximum = null,
+    double? minimum = null,
+    bool? exclusiveMinimum = null,
     [property:JsonConverter(typeof(AnyOfJsonConverter<OpenApiSchema, OpenApiReference>))]
-    TypeUnion<OpenApiSchema, OpenApiReference>? items,
-    int? maxLength,
-    int? minLength,
-    string? pattern,
-    int? maxItems,
-    int? minItems,
-    bool? uniqueItems,
-    int? maxProperties,
-    int? minProperties,
-    string[]? required,
+    TypeUnion<OpenApiSchema, OpenApiReference>? items = null,
+    int? maxLength = null,
+    int? minLength = null,
+    string? pattern = null,
+    int? maxItems = null,
+    int? minItems = null,
+    bool? uniqueItems = null,
+    int? maxProperties = null,
+    int? minProperties = null,
+    string[]? required = null,
     [property:JsonConverter(typeof(DictionarySystemTextJsonConverter<AnyOfJsonConverter<OpenApiSchema, OpenApiReference>, TypeUnion<OpenApiSchema, OpenApiReference>>))]
-    Dictionary<string, TypeUnion<OpenApiSchema, OpenApiReference>>? properties,
-    [property:JsonConverter(typeof(AnyOfJsonConverter<bool, TypeUnion<OpenApiSchema, OpenApiReference>>))]// TODO: nested items are supported ?
-    TypeUnion<bool, TypeUnion<OpenApiSchema, OpenApiReference>>? additionalProperties,
-    JsonElement[]? @enum,
+    Dictionary<string, TypeUnion<OpenApiSchema, OpenApiReference>>? properties = null,
+    [property:JsonConverter(typeof(RecursiveAnyOfJsonConverter<bool, TypeUnion<OpenApiSchema, OpenApiReference>>))]
+    TypeUnion<bool, TypeUnion<OpenApiSchema, OpenApiReference>>? additionalProperties = null,
+    JsonElement[]? @enum = null,
     [property:JsonConverter(typeof(ArraySystemTextJsonConverter<AnyOfJsonConverter<OpenApiSchema, OpenApiReference>, TypeUnion<OpenApiSchema, OpenApiReference>>))]
-    TypeUnion<OpenApiSchema, OpenApiReference>[]? allOf,
+    TypeUnion<OpenApiSchema, OpenApiReference>[]? allOf = null,
     [property:JsonConverter(typeof(ArraySystemTextJsonConverter<AnyOfJsonConverter<OpenApiSchema, OpenApiReference>, TypeUnion<OpenApiSchema, OpenApiReference>>))]
-    TypeUnion<OpenApiSchema, OpenApiReference>[]? anyOf,
+    TypeUnion<OpenApiSchema, OpenApiReference>[]? anyOf = null,
     [property:JsonConverter(typeof(ArraySystemTextJsonConverter<AnyOfJsonConverter<OpenApiSchema, OpenApiReference>, TypeUnion<OpenApiSchema, OpenApiReference>>))]
-    TypeUnion<OpenApiSchema, OpenApiReference>[]? oneOf,
+    TypeUnion<OpenApiSchema, OpenApiReference>[]? oneOf = null,
     [property:JsonConverter(typeof(AnyOfJsonConverter<OpenApiSchema, OpenApiReference>))]
-    TypeUnion<OpenApiSchema, OpenApiReference>? not,
-    JsonElement? @default,
-    bool? nullable,
-    OpenApiDiscriminator? discriminator,
-    bool? readOnly,
-    bool? writeOnly,
-    OpenApiXml? xml,
-    OpenApiExternalDocumentation? externalDocs,
-    JsonElement? example,
-    bool? deprecated
+    TypeUnion<OpenApiSchema, OpenApiReference>? not = null,
+    JsonElement? @default = null,
+    bool? nullable = null,
+    OpenApiDiscriminator? discriminator = null,
+    bool? readOnly = null,
+    bool? writeOnly = null,
+    OpenApiXml? xml = null,
+    OpenApiExternalDocumentation? externalDocs = null,
+    JsonElement? example = null,
+    bool? deprecated = null
 )
 {
 
@@ -361,15 +361,15 @@ public record OpenApiSchema(
 
 public record OpenApiDiscriminator(
     string propertyName,
-    Dictionary<string, string>? mapping
+    Dictionary<string, string>? mapping = null
 );
 
 public record OpenApiXml(
-    string? name,
-    string? @namespace,
-    string? prefix,
-    bool? attribute,
-    bool? wrapped
+    string? name = null,
+    string? @namespace = null,
+    string? prefix = null,
+    bool? attribute = null,
+    bool? wrapped = null
 )
 {
     [JsonExtensionData]
@@ -378,13 +378,13 @@ public record OpenApiXml(
 
 public record OpenApiSecurityScheme(
     string type,
-    string? description,
-    string? name,
-    string? @in,
-    string? scheme,
-    string? bearerFormat,
-    OpenApiOAuthFlows? flows,
-    string? openIdConnectUrl
+    string? description = null,
+    string? name = null,
+    string? @in = null,
+    string? scheme = null,
+    string? bearerFormat = null,
+    OpenApiOAuthFlows? flows = null,
+    string? openIdConnectUrl = null
 )
 {
 
@@ -393,10 +393,10 @@ public record OpenApiSecurityScheme(
 };
 
 public record OpenApiOAuthFlows(
-    OpenApiOAuthFlow? @implicit,
-    OpenApiOAuthFlow? password,
-    OpenApiOAuthFlow? clientCredentials,
-    OpenApiOAuthFlow? authorizationCode
+    OpenApiOAuthFlow? @implicit = null,
+    OpenApiOAuthFlow? password = null,
+    OpenApiOAuthFlow? clientCredentials = null,
+    OpenApiOAuthFlow? authorizationCode = null
 )
 {
 
@@ -405,10 +405,10 @@ public record OpenApiOAuthFlows(
 };
 
 public record OpenApiOAuthFlow(
-    string? authorizationUrl,
-    string? tokenUrl,
-    string? refreshUrl,
-    Dictionary<string, string>? scopes
+    string? authorizationUrl = null,
+    string? tokenUrl = null,
+    string? refreshUrl = null,
+    Dictionary<string, string>? scopes = null
 )
 {
 

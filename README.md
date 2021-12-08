@@ -14,12 +14,7 @@ It can be used to can write your own code generators for the language/framework 
 
 ```cs
 var fileContent = await File.ReadAllBytesAsync(fileName);
-var document = JsonSerializer.Deserialize<OpenApiDocument>(fileContent, new JsonSerializerOptions
-{
-    Converters = {
-        new AnyOfJsonConverter<OpenApiSchema, OpenApiReference>()// TODO: temp hack because it doesn't support nested converters
-    }
-})!;
+var document = JsonSerializer.Deserialize<OpenApiDocument>(fileContent)!;
 
 // Models
 foreach (var model in document.GetModels())

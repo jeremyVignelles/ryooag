@@ -15,11 +15,11 @@
     <RepositoryUrl>https://github.com/jeremyVignelles/ryooag.git</RepositoryUrl>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="../Documentation/Ryooag.md" Pack="true" PackagePath="\"/>
+    <None Include="../Documentation/Ryooag.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ooak.SystemTextJson" Version="0.0.3" />
+    <PackageReference Include="Ooak.SystemTextJson" Version="0.1.0" />
   </ItemGroup>
 
 </Project>
