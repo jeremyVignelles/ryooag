@@ -8,3 +8,35 @@ It can be used to can write your own code generators for the language/framework 
 # Why ?
 
 // TODO : a lot to say here
+
+
+# How to use it ?
+
+```cs
+var fileContent = await File.ReadAllBytesAsync(fileName);
+var document = JsonSerializer.Deserialize<OpenApiDocument>(fileContent, new JsonSerializerOptions
+{
+    Converters = {
+        new AnyOfJsonConverter<OpenApiSchema, OpenApiReference>()// TODO: temp hack because it doesn't support nested converters
+    }
+})!;
+
+// Models
+foreach (var model in document.GetModels())
+{
+    Console.WriteLine(model.name);
+}
+
+// Operations
+foreach (var (path, pathItem) in document.paths)
+{
+    // Do something for each path item
+    if(pathItem.get is not null)
+    {
+        Console.WriteLine("GET " + path);
+    }
+    // ...
+}
+```
+
+NOTE : helpers are expected to be added to Ryooag to help simplify the process of generating this kind of code
