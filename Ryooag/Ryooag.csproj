@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Version>0.0.1</Version>
+    <Description>Ryooag - Roll-Your-Own OpenApi Generator</Description>
+    <Authors>Jérémy VIGNELLES</Authors>
+    <PackageReadmeFile>Ryooag.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/jeremyVignelles/ryooag.git</RepositoryUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="../Documentation/Ryooag.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ooak.SystemTextJson" Version="0.0.3" />
+  </ItemGroup>
+
+</Project>
