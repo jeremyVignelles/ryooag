@@ -127,13 +127,11 @@ public record OpenApiPathItem(
     OpenApiServer[]? servers,
 
     [property:JsonConverter(typeof(ArraySystemTextJsonConverter<AnyOfJsonConverter<OpenApiParameter, OpenApiReference>, TypeUnion<OpenApiParameter, OpenApiReference>>))]
-    TypeUnion<OpenApiParameter, OpenApiReference>[]? parameters
+    TypeUnion<OpenApiParameter, OpenApiReference>[]? parameters,
+
+    [property:JsonPropertyName("$ref")] string? _ref
 )
 {
-
-    [JsonPropertyName("$ref")]
-    public string? _ref { get; init; }
-
     [JsonExtensionData]
     public Dictionary<string, JsonElement>? extensions { get; init; }
 };
@@ -415,5 +413,5 @@ public record OpenApiOAuthFlow(
 {
 
     [JsonExtensionData]
-    public Dictionary<string, JsonElement>? extension { get; init; }
+    public Dictionary<string, JsonElement>? extensions { get; init; }
 };
