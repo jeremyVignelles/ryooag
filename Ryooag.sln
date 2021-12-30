@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ryooag", "Ryooag\Ryooag.csproj", "{18C6D420-C71B-4744-B252-C89C0794A900}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ryooag", "Ryooag\Ryooag.csproj", "{18C6D420-C71B-4744-B252-C89C0794A900}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ryooag.Testing", "Ryooag.Testing\Ryooag.Testing.csproj", "{EB086A64-8027-4473-9668-C3DD9344F848}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ryooag.Testing", "Ryooag.Testing\Ryooag.Testing.csproj", "{EB086A64-8027-4473-9668-C3DD9344F848}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetstoreGenerator", "examples\PetstoreGenerator\PetstoreGenerator.csproj", "{AF49C006-3675-4CCF-9A69-808FAF7F3E54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetstoreGenerator.TestApp", "examples\PetstoreGenerator.TestApp\PetstoreGenerator.TestApp.csproj", "{4A790B03-CC5B-4874-9F0D-88FF319A4C23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{EB086A64-8027-4473-9668-C3DD9344F848}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB086A64-8027-4473-9668-C3DD9344F848}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB086A64-8027-4473-9668-C3DD9344F848}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF49C006-3675-4CCF-9A69-808FAF7F3E54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF49C006-3675-4CCF-9A69-808FAF7F3E54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF49C006-3675-4CCF-9A69-808FAF7F3E54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF49C006-3675-4CCF-9A69-808FAF7F3E54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A790B03-CC5B-4874-9F0D-88FF319A4C23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A790B03-CC5B-4874-9F0D-88FF319A4C23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A790B03-CC5B-4874-9F0D-88FF319A4C23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A790B03-CC5B-4874-9F0D-88FF319A4C23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

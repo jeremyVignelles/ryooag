@@ -6,14 +6,8 @@ namespace Ryooag.Internal;
 // because System.Text.Json says it properly deserialized a model even when no property was filled.
 // So the JSON `{}` will be allowed in models like OpenApiResponse where all properties are optional
 
-internal class OneOfOpenApiSchemaOpenApiReferenceConverter : OneOfJsonConverter<OpenApiSchema, OpenApiReference>
+internal class SchemaOrOpenApiReferenceConverter<TSchema> : OneOfJsonConverter<TSchema, OpenApiReference> where TSchema: SchemaPartWithExtension, new()
 {
-    protected override bool LeftIsValid(OpenApiSchema value) => value with { extensions = null } != new OpenApiSchema();
-    protected override bool RightIsValid(OpenApiReference value) => value._ref is not null;
-}
-
-internal class OneOfOpenApiResponseOpenApiReferenceConverter : OneOfJsonConverter<OpenApiResponse, OpenApiReference>
-{
-    protected override bool LeftIsValid(OpenApiResponse value) => value with { extensions = null } != new OpenApiResponse();
+    protected override bool LeftIsValid(TSchema value) => value with { extensions = null } != new TSchema();
     protected override bool RightIsValid(OpenApiReference value) => value._ref is not null;
 }
